@@ -1,5 +1,6 @@
 'use client'
 
+import { CustomLegend } from '@/app/_components/CustomLegend'
 import { PolarAngleAxisTick } from '@/app/_components/PolarAngleAxisTick'
 import { PolarRadiusAxisTick } from '@/app/_components/PolarRadiusAxisTick'
 import { SUBJECT_NAME } from '@/app/_constants/subjectName'
@@ -47,11 +48,19 @@ export default function Home() {
   const bDataKey = 'B'
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-white">
-      <div className="flex flex-col">
-        <ResponsiveContainer aspect={1} width={1000} height={1000}>
+    <main className="flex min-h-screen flex-col items-center p-24 bg-white">
+      <div className='w-full h-4 bg-gray-500' />
+      <div className='flex flex-col w-full min-w-48'>
+        <ResponsiveContainer aspect={1} >
           <RadarChart
             data={data}
+            outerRadius="100%"
+            margin={{
+              top: 60,
+              right: 60,
+              bottom: 60,
+              left: 60,
+            }}
           >
             <PolarGrid strokeWidth={0.5} />
             <PolarAngleAxis
@@ -77,10 +86,14 @@ export default function Home() {
               fill="#F0908D"
               fillOpacity={0.2}
             />
-            <Legend />
           </RadarChart>
         </ResponsiveContainer>
+        <CustomLegend data={[
+          {name: "Aデータ", colorStyle: "border-[#BCE2E8] bg-[#BCE2E8]"},
+          {name: "Bデータ", colorStyle: "border-[#F0908D] bg-[#F0908D]"}
+        ]} />
       </div>
+      <div className='w-full h-4 bg-gray-500' />
     </main>
   )
 }
