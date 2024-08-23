@@ -1,5 +1,8 @@
 'use client'
 
+import { PolarAngleAxisTick } from '@/app/_components/PolarAngleAxisTick'
+import { PolarRadiusAxisTick } from '@/app/_components/PolarRadiusAxisTick'
+import { SUBJECT_NAME } from '@/app/_constants/subjectName'
 import {
   RadarChart,
   Radar,
@@ -9,13 +12,6 @@ import {
   ResponsiveContainer,
   Legend,
 } from 'recharts'
-
-export const SUBJECT_NAME = {
-  hoge: "hoge",
-  fuga: "fuga",
-  foo: "foo",
-  bar: "bar",
-}
 
 
 export default function Home() {
@@ -56,23 +52,18 @@ export default function Home() {
         <ResponsiveContainer aspect={1} width={1000} height={1000}>
           <RadarChart
             data={data}
-            // outerRadius={90}
-            // margin={{
-            //   top: 40,
-            //   right: 40,
-            //   bottom: 40,
-            //   left: 40,
-            // }}
           >
             <PolarGrid strokeWidth={0.5} />
             <PolarAngleAxis
               dataKey="subject"
+              tick={<PolarAngleAxisTick />}
             />
             <PolarRadiusAxis
               scale="linear"
               angle={30}
               tickCount={5}
               domain={[0, fullMark]}
+              tick={<PolarRadiusAxisTick />}
             />
             <Radar
               dataKey={aDataKey}
